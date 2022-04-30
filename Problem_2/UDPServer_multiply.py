@@ -18,8 +18,11 @@ while True:
     messageBytes, clientAddress = serverSocket.recvfrom(2048)
     clientIP, clientPort = clientAddress
 
+    print("Connected to client at " + clientIP)
+
     # Decode the message bytes
     message = messageBytes.decode("utf-8")
+    print('Message is ' + message)
 
     # Split the message by commas
     numbers = message.split(",")
@@ -29,8 +32,8 @@ while True:
     try:
         product = 1
         for num in numbers:
-            product = product * num
-        msg = product
+            product = product * float(num)
+        msg = str(product)
         serverSocket.sendto(msg.encode("utf-8"), clientAddress)
     except:
         # Print "Invalid Message to the client"

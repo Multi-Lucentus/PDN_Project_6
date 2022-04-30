@@ -3,22 +3,17 @@ from socket import *
 # Create a UDP Socket
 clientSocket = socket(AF_INET, SOCK_DGRAM)
 
-# Input a series of numbers
-message = ''
-input = ''
-while input != 'quit':
-    # Ask the user for a new number
-    input = input()
+# Bind the client
+clientSocket.bind(('127.0.0.1', 10000))
 
-    # Append the number to the end
-    if(input != 'quit'):
-        message = message + ',' + input
+# Input a series of numbers
+numbers = input("Enter a list of numbers: ")
 
 # Send the message to the server to multiply
-messageBytes = message.encode("utf-8")
+messageBytes = numbers.encode("utf-8")
 
 serverIP = '127.0.0.1'
-serverPort = 12345
+serverPort = 1234
 serverAddress = (serverIP, serverPort)
 
 clientSocket.sendto(messageBytes, serverAddress)
@@ -27,7 +22,7 @@ clientSocket.sendto(messageBytes, serverAddress)
 recvBytes, serverAddress = clientSocket.recvfrom(2048)
 recv = recvBytes.decode("utf-8")
 
-clientSocket.close()
-
 # Output the number 
-print(recv)
+print(f'{recv}')
+
+clientSocket.close()
