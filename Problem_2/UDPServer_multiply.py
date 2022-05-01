@@ -22,7 +22,6 @@ while True:
 
     # Decode the message bytes
     message = messageBytes.decode("utf-8")
-    print('Message is ' + message)
 
     # Split the message by commas
     numbers = message.split(",")
